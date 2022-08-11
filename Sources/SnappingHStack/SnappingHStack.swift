@@ -13,7 +13,7 @@ public struct SnappingHStack: ViewModifier {
     var viewWidth: CGFloat
     var viewSpacing: CGFloat
     
-    init(viewAmount:Int, viewWidth:CGFloat, viewSpacing:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat) {
+    public init(viewAmount:Int, viewWidth:CGFloat, viewSpacing:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat) {
         
         self.ScreenWidth = screenWidth
         self.viewAmount = viewAmount
