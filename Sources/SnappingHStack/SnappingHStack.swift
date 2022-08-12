@@ -53,17 +53,32 @@ public struct SnappingHStack: ViewModifier {
                         
                         if index - 0.5 < CGFloat(oldIndex){
                             if CGFloat(oldIndex) - (index - 0.5) > 0.05 {
+                                print("first\(index)")
                                 oldIndex -= 1
                                 index = CGFloat(oldIndex)
+                                print("second\(index)")
+
                             } else {
+                                print("fourth\(index)")
+
                                 index = (CGFloat(oldIndex))
+                                print("third\(index)")
+
                             }
                         } else {
                             if (index - 0.5) - CGFloat(oldIndex) > 0.5 {
+                                print("first\(index)")
+
                                 oldIndex += 1
                                 index = CGFloat(oldIndex)
+                                print("first\(index)")
+
                             } else{
+                                print("first\(index)")
+
                                 index = CGFloat(oldIndex)
+                                print("first\(index)")
+
                             }
                         }
                         
