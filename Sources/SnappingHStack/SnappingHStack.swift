@@ -24,7 +24,7 @@ public struct SnappingHStack: ViewModifier {
         self.oldIndex = viewAmount - 1
         self.switchSnapBound = switchSnapBound
         
-        let totalWidth:CGFloat = CGFloat(viewAmount) * viewWidth + viewSpacing * CGFloat(viewAmount-1)
+        let totalWidth:CGFloat = CGFloat(viewAmount) * viewWidth + viewSpacing * CGFloat(viewAmount+1)
         
         let initialOffset = (totalWidth/2) - (screenWidth/2)
         
