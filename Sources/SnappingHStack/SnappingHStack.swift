@@ -36,7 +36,7 @@ public struct SnappingHStack: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .offset(x:dragOffset + scrollOffset + viewSpacing)
+            .offset(x:dragOffset + scrollOffset)
             .gesture(DragGesture()
                 .onChanged({ event in
                     dragOffset = event.translation.width
