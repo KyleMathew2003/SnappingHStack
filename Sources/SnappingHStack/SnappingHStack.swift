@@ -47,7 +47,7 @@ public struct SnappingHStack: ViewModifier {
                         scrollOffset += event.translation.width
                         dragOffset = 0
                         
-                        let contentWidth: CGFloat = CGFloat(viewAmount) * viewWidth + CGFloat(viewAmount - 1) * viewSpacing
+                        let contentWidth: CGFloat = CGFloat(viewAmount) * viewWidth + CGFloat(viewAmount + 1) * viewSpacing
                         
                         let midpoint = scrollOffset + (contentWidth / 2.0)
                         
@@ -75,7 +75,7 @@ public struct SnappingHStack: ViewModifier {
                         index = min(index, CGFloat(viewAmount) - 1)
                         index = max(index, 0)
                         
-                        var newOffset = index * viewWidth + (index - 1) * viewSpacing - (contentWidth/2.0) + (ScreenWidth / 2.0) - ((ScreenWidth - viewWidth) / 2.0) + viewSpacing
+                        var newOffset = index * viewWidth + (index + 1) * viewSpacing - (contentWidth/2.0) + (ScreenWidth / 2.0) - ((ScreenWidth - viewWidth) / 2.0) + viewSpacing
                         
                         newOffset = min(newOffset,CGFloat((viewAmount - 1))*ScreenWidth / 2)
                         newOffset = max(newOffset,CGFloat(-(viewAmount - 1))*ScreenWidth / 2)
