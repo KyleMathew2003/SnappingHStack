@@ -12,19 +12,17 @@ public struct SnappingHStack: ViewModifier {
     public var ScreenWidth: CGFloat
     public var viewAmount: Int
     public var viewWidth: CGFloat
-    public var viewSpacing: CGFloat
     
-    public init(viewAmount:Int, viewWidth:CGFloat, viewSpacing:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat,switchSnapBound:CGFloat) {
+    public init(viewAmount:Int, viewWidth:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat,switchSnapBound:CGFloat) {
         
         self.ScreenWidth = screenWidth
         self.viewAmount = viewAmount
         self.viewWidth = viewWidth
-        self.viewSpacing = viewSpacing
         self.index = CGFloat(viewAmount)
         self.oldIndex = viewAmount - 1
         self.switchSnapBound = switchSnapBound
         
-        let totalWidth:CGFloat = CGFloat(viewAmount) * viewWidth + viewSpacing * CGFloat(viewAmount+1)
+        let totalWidth:CGFloat = CGFloat(viewAmount) * viewWidth
         
         let initialOffset = (totalWidth/2) - (screenWidth/2)
         
@@ -47,11 +45,10 @@ public struct SnappingHStack: ViewModifier {
                         scrollOffset += event.translation.width
                         dragOffset = 0
                         
-                        let contentWidth: CGFloat = CGFloat(viewAmount) * viewWidth + CGFloat(viewAmount + 1) * viewSpacing
-                        
+                        let contentWidth: CGFloat = CGFloat(viewAmount) * viewWidth
                         let midpoint = scrollOffset + (contentWidth / 2.0)
                         
-                        index = (midpoint) / (viewWidth + viewSpacing)
+                        index = (midpoint) / (viewWidth)
                         
                         if index - 0.5 < CGFloat(oldIndex){
                             if CGFloat(oldIndex) - (index - 0.5) > switchSnapBound {
@@ -75,7 +72,7 @@ public struct SnappingHStack: ViewModifier {
                         index = min(index, CGFloat(viewAmount) - 1)
                         index = max(index, 0)
                         
-                        var newOffset = index * viewWidth + (index + 1) * viewSpacing - (contentWidth/2.0) + (ScreenWidth / 2.0) - ((ScreenWidth - viewWidth) / 2.0) + viewSpacing
+                        var newOffset = index * viewWidth - (contentWidth/2.0) + (ScreenWidth / 2.0) - ((ScreenWidth - viewWidth) / 2.0)
                         
                         newOffset = min(newOffset,CGFloat((viewAmount - 1))*ScreenWidth / 2)
                         newOffset = max(newOffset,CGFloat(-(viewAmount - 1))*ScreenWidth / 2)
