@@ -75,6 +75,10 @@ public struct SnappingHStack: ViewModifier {
                         newOffset = min(newOffset,CGFloat((viewAmount - 1))*ScreenWidth / 2)
                         newOffset = max(newOffset,CGFloat(-(viewAmount - 1))*ScreenWidth / 2)
                         
+                        withAnimation{
+                            scrollOffset = newOffset
+                        }
+                        
                     })
             )
         
