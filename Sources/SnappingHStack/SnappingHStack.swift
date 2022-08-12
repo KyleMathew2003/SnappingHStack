@@ -8,12 +8,13 @@ public struct SnappingHStack: ViewModifier {
     @State var index: CGFloat
     @State var oldIndex: Int
     
+    public var switchSnapBound: CGFloat
     public var ScreenWidth: CGFloat
     public var viewAmount: Int
     public var viewWidth: CGFloat
     public var viewSpacing: CGFloat
     
-    public init(viewAmount:Int, viewWidth:CGFloat, viewSpacing:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat) {
+    public init(viewAmount:Int, viewWidth:CGFloat, viewSpacing:CGFloat, scrollOffset:Binding<CGFloat>,screenWidth:CGFloat,switchSnapBound:CGFloat) {
         
         self.ScreenWidth = screenWidth
         self.viewAmount = viewAmount
@@ -21,6 +22,7 @@ public struct SnappingHStack: ViewModifier {
         self.viewSpacing = viewSpacing
         self.index = CGFloat(viewAmount)
         self.oldIndex = viewAmount - 1
+        self.switchSnapBound = switchSnapBound
         
         let totalWidth:CGFloat = CGFloat(viewAmount) * viewWidth + viewSpacing * CGFloat(viewAmount-1)
         
@@ -52,33 +54,21 @@ public struct SnappingHStack: ViewModifier {
                         index = (midpoint) / (viewWidth + viewSpacing)
                         
                         if index - 0.5 < CGFloat(oldIndex){
-                            if CGFloat(oldIndex) - (index - 0.5) > 0.05 {
-                                print("1st \(index)")
+                            if CGFloat(oldIndex) - (index - 0.5) > switchSnapBound {
                                 oldIndex -= 1
                                 index = CGFloat(oldIndex)
-                                print("2nd \(index)")
 
                             } else {
-                                print("3rd \(index)")
 
                                 index = (CGFloat(oldIndex))
-                                print("4th \(index)")
-
                             }
                         } else {
-                            if (index - 0.5) - CGFloat(oldIndex) > 0.5 {
-                                print("5th \(index)")
-
+                            if (index - 0.5) - CGFloat(oldIndex) > switchSnapBound {
                                 oldIndex += 1
                                 index = CGFloat(oldIndex)
-                                print("6th \(index)")
 
                             } else{
-                                print("7th \(index)")
-
                                 index = CGFloat(oldIndex)
-                                print("8th \(index)")
-
                             }
                         }
                         
